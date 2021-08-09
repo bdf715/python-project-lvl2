@@ -28,10 +28,9 @@ def generate_diff(first_file, second_file):
         elif key in keys_in_both_files and first_file[key] == second_file[key]:
             key_string = "   {0}: {1}\n".format(key, first_file[key])
         else:
-            key_string = "" \
-                         " - {0}: {1}\n" \
+            key_string = " - {0}: {1}\n" \
                          " + {2}: {3}\n" \
-                         "".format(key, first_file[key], key, second_file[key])
+                         .format(key, first_file[key], key, second_file[key])
         result += key_string
     result += "}"
     return result
