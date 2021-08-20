@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.2.0"
-description = ""
+description = "Generate difference of 2 files"
 authors = ["Aleksandr Efimovskiy <bdf715@gmail.com>"]
 packages = [
   { include = "gendiff" },
@@ -15,6 +15,8 @@ repository = "https://github.com/bdf715/python-project-lvl2"
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
+flake8 = "^3.9.2"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
