@@ -44,8 +44,9 @@ def main():
     args = parser.parse_args()
     first_file = get_dict_from_json(args.first_file)
     second_file = get_dict_from_json(args.second_file)
-    print(first_file, second_file, sep = '\n')
+    print(first_file, second_file, sep='\n')
     print(generate_diff(first_file, second_file))
+
 
 if __name__ == '__main__':
     main()
