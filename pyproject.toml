@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "0.4.2"
+version = "0.4.3"
 description = "Generate difference of 2 files"
 authors = ["Aleksandr Efimovskiy <bdf715@gmail.com>"]
 packages = [
