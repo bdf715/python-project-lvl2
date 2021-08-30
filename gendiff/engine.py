@@ -1,5 +1,4 @@
 from gendiff.parser import get_parsed_json
-from gendiff.cli import get_path_to_files
 from gendiff.formatter import formatter
 
 
