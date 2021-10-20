@@ -10,7 +10,7 @@ def is_json(path):
     return path.endswith('json')
 
 
-def get_parsed_json(first_path, second_path):
+def get_parsed(first_path, second_path):
     if is_json(first_path) and is_json(second_path):
         first = json.load(open(first_path))
         second = json.load(open(second_path))
