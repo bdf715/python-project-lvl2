@@ -2,55 +2,67 @@ from gendiff.parser import get_parsed
 from gendiff.formatter import formatter
 
 
-def key_removed(key, first_keys, second_keys):
-    return key in first_keys - second_keys
+def key_added(key, first, second):
+    return key not in first and key in second
 
 
-def key_added(key, first_keys, second_keys):
-    return key in second_keys - first_keys
+def key_removed(key, first, second):
+    return key in first and key not in second
 
 
-def key_kept(key, first_keys, second_keys):
-    return key in first_keys & second_keys
+def key_changed(key, first, second):
+    return key in first and key in second and first[key] != second[key]
 
 
-def get_total_keys(first_keys, second_keys):
-    return first_keys | second_keys
+def key_saved(key, first, second):
+    return key in first and key in second and first[key] == second[key]
 
 
-def mkdir(name, children=[], meta=''):
+def key_recursive(key, first, second):
+    return key in first and key in second\
+        and type(first[key]) is dict and type(second[key]) is dict
+
+
+def get_total_keys(first, second):
+    total_keys = list(first.keys() | second.keys())
+    total_keys.sort()
+    return total_keys
+
+
+def mknode(name, children, status):
     return {
             'name': name,
             'children': children,
-            'type': 'dir',
-            'meta': meta
+            'status': status
             }
 
 
-def mkfile(name, value, sign):
+def mkleaf(name, value, status, old_value=''):
     return {
             'name': name,
             'value': value,
-            'sign': sign
+            'old_value': old_value,
+            'status': status
             }
+
+
+def make_diff(first, second):
+    result = []
+    keys = get_total_keys(first, second)
+    for key in keys:
+        if key_recursive(key, first, second):
+            result.append(mknode(key, make_diff(first[key], second[key]), 'rec'))
+        elif key_added(key, first, second):
+            result.append(mkleaf(key, second[key], 'add'))
+        elif key_removed(key, first, second):
+            result.append(mkleaf(key, first[key], 'del'))
+        elif key_changed(key, first, second):
+            result.append(mkleaf(key, second[key], 'chg', first[key]))
+        elif key_saved(key, first, second):
+            result.append(mkleaf(key, first[key], 'sav'))
+    return result
 
 
 def generate_diff(first_path, second_path):
     first_parsed, second_parsed = get_parsed(first_path, second_path)
-    first_keys = set(first_parsed.keys())
-    second_keys = set(second_parsed.keys())
-    total_keys = list(get_total_keys(first_keys, second_keys))
-    total_keys.sort()
-    result = []
-    for key in total_keys:
-        if key_removed(key, first_keys, second_keys):
-            result.append(mkfile(key, first_parsed[key], '-'))
-        elif key_added(key, first_keys, second_keys):
-            result.append(mkfile(key, second_parsed[key], '+'))
-        elif key_kept(key, first_keys, second_keys)\
-                and first_parsed[key] == second_parsed[key]:
-            result.append(mkfile(key, first_parsed[key], ' '))
-        else:
-            result.append(mkfile(key, first_parsed[key], '-'))
-            result.append(mkfile(key, second_parsed[key], '+'))
-    return formatter(result)
+    return mknode('/', make_diff(first_parsed, second_parsed), 'rec')

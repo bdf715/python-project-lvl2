@@ -6,6 +6,8 @@ gentest:
 	poetry run gendiff tests/fixtures/file1.json tests/fixtures/file2.json
 gentest1:
 	poetry run gendiff tests/fixtures/file1_recursive.json tests/fixtures/file2_recursive.json
+gentest2:
+	poetry run gendiff tests/fixtures/file1_simple.json tests/fixtures/file2_simple.json
 publish:
 	poetry publish --dry-run
 package-install:
