@@ -13,6 +13,5 @@ def main():
     pprint(generate_diff(first_path, second_path))
 
 
-
 if __name__ == '__main__':
     main()
