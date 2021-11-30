@@ -1,5 +1,5 @@
 from gendiff.parser import get_parsed
-# from gendiff.formatter import formatter
+from gendiff.formatter import formatter_rec
 from gendiff.constants import ADDED, REMOVED, SAVED, CHANGED, RECURSIVE
 
 
@@ -48,10 +48,21 @@ def make_diff(first, second):
     return result
 
 
+def make_result(node):
+    if node['status'] != RECURSIVE:
+        return formatter_rec(node)
+    children = node['children']
+    return ''.join(map(make_result, children))
+
+
 def generate_diff(first_path, second_path):
     first_parsed, second_parsed = get_parsed(first_path, second_path)
-    return {
+    tree = {
         'name': '/',
         'children': make_diff(first_parsed, second_parsed),
         'status': RECURSIVE
     }
+    result = '{\n'
+    result += make_result(tree)
+    result += '}'
+    return result
