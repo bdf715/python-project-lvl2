@@ -62,7 +62,4 @@ def generate_diff(first_path, second_path):
         'children': make_diff(first_parsed, second_parsed),
         'status': RECURSIVE
     }
-    result = '{\n'
-    result += make_result(tree)
-    result += '}'
-    return result
+    return formatter_rec(tree)
