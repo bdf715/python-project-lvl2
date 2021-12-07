@@ -5,7 +5,6 @@
 
 from gendiff.engine import generate_diff
 from gendiff.cli import get_path_to_files
-#from pprint import pprint
 
 
 def main():

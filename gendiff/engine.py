@@ -48,13 +48,6 @@ def make_diff(first, second):
     return result
 
 
-def make_result(node):
-    if node['status'] != RECURSIVE:
-        return formatter_rec(node)
-    children = node['children']
-    return ''.join(map(make_result, children))
-
-
 def generate_diff(first_path, second_path):
     first_parsed, second_parsed = get_parsed(first_path, second_path)
     tree = {

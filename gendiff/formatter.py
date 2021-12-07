@@ -1,5 +1,4 @@
 from gendiff.constants import ADDED, REMOVED, SAVED, CHANGED, RECURSIVE
-from pprint import pprint
 
 
 def flatten(tree):
@@ -25,8 +24,19 @@ def format_dict(data, shift):
         res.append(' ' * (shift - 4) + '}')
         result = '\n'.join(flatten(res))
     else:
-        result = data
+        result = final_format(data)
     return result
+
+
+def final_format(value):
+    if value is True:
+        return 'true'
+    elif value is False:
+        return 'false'
+    elif value is None:
+        return 'null'
+    else:
+        return value
 
 
 def formatter_rec(node, shift=-4):
