@@ -16,6 +16,8 @@ make lint:
 	poetry run flake8 gendiff
 make test:
 	poetry run pytest
+make test-detail:
+	poetry run pytest -vv
 selfcheck:
 	poetry check
 
