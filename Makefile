@@ -3,11 +3,11 @@ install:
 gendiff:
 	poetry run gendiff -h
 gentest:
-	poetry run gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+	poetry run gendiff tests/fixtures/file1_simple.yaml tests/fixtures/file2_simple.yaml
 gentest1:
-	poetry run gendiff tests/fixtures/file1_recursive.yaml tests/fixtures/file2_recursive.yaml
+	poetry run gendiff tests/fixtures/file1_nested.json tests/fixtures/file2_nested.json
 gentest2:
-	poetry run gendiff tests/fixtures/file1_simple.json tests/fixtures/file2_simple.json
+	poetry run gendiff tests/fixtures/file1_nested.yaml tests/fixtures/file2_nested.yaml
 publish:
 	poetry publish --dry-run
 package-install:
