@@ -9,12 +9,9 @@ def is_yaml(path):
 def is_json(path):
     return path.endswith('json')
 
-
-def get_parsed(first_path, second_path):
-    if is_json(first_path) and is_json(second_path):
-        first = json.load(open(first_path))
-        second = json.load(open(second_path))
-    if is_yaml(first_path) and is_yaml(second_path):
-        first = yaml.safe_load(open(first_path))
-        second = yaml.safe_load(open(second_path))
+def get_parsed(path):
+    if is_json(path):
+        return json.load(open(path))
+    elif is_yaml(path):
+        return yaml.safe_load(open(path))
     return first, second

@@ -49,7 +49,8 @@ def make_diff(first, second):
 
 
 def generate_diff(first_path, second_path):
-    first_parsed, second_parsed = get_parsed(first_path, second_path)
+    first_parsed = get_parsed(first_path)
+    second_parsed = get_parsed(second_path)
     tree = {
         'name': '/',
         'children': make_diff(first_parsed, second_parsed),
