@@ -1,6 +1,11 @@
 from gendiff.constants import ADDED, REMOVED, SAVED, CHANGED, RECURSIVE
 
 
+def formatter(tree, format_name):
+    if format_name == 'stylish':
+        return formatter_rec(tree)
+
+
 def flatten(tree):
     result = []
 

@@ -8,8 +8,8 @@ from gendiff.cli import get_path_to_files
 
 
 def main():
-    first_path, second_path = get_path_to_files()
-    print(generate_diff(first_path, second_path))
+    first_path, second_path, format_name = get_path_to_files()
+    print(generate_diff(first_path, second_path, format_name))
 
 
 if __name__ == '__main__':
