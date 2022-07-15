@@ -12,11 +12,11 @@ publish:
 	poetry publish --dry-run
 package-install:
 	python3 -m pip install --user dist/*.whl
-make lint:
+lint:
 	poetry run flake8 gendiff
-make test:
+test:
 	poetry run pytest
-make test-detail:
+test-detail:
 	poetry run pytest -vv
 selfcheck:
 	poetry check
@@ -27,4 +27,4 @@ build:  check
 	poetry build
 test-coverage:
 	poetry run pytest --cov=gendiff --cov-report xml
-.PHONY: install test lint selfcheck check build gendiff
+.PHONY: install test lint selfcheck check build gendiff test-detail gentest

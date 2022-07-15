@@ -20,7 +20,8 @@ def format_dict(data, shift):
         res.append('{')
         shift += 4
         for key, value in data.items():
-            res.append(' ' * shift + str(key) + ': ' + str(format_dict(value, shift)))
+            res.append(' ' * shift + str(key) + ': ' + str(format_dict(value,
+                                                                       shift)))
         res.append(' ' * (shift - 4) + '}')
         result = '\n'.join(flatten(res))
     else:
@@ -46,16 +47,23 @@ def formatter_rec(node, shift=-4):
         res = []
         shift += 4
         res.append(' ' * shift + name + ': {' if name != '/' else '{')
-        res.append(list(map(lambda child: formatter_rec(child, shift), node['children'])))
+        res.append(list(map(lambda child: formatter_rec(child, shift),
+                            node['children'])))
         res.append(' ' * shift + '}')
-        #pprint(flatten(res))
         return '\n'.join(flatten(res))
     elif status == ADDED:
-        return '{2}  + {0}: {1}'.format(name, format_dict(node['value'], shift+4), shift * ' ')
+        return '{2}  + {0}: {1}'.format(name, format_dict(node['value'],
+                                        shift + 4), shift * ' ')
     elif status == REMOVED:
-        return '{2}  - {0}: {1}'.format(name, format_dict(node['value'], shift+4), shift * ' ')
+        return '{2}  - {0}: {1}'.format(name, format_dict(node['value'],
+                                        shift + 4), shift * ' ')
     elif status == SAVED:
-        return '{2}    {0}: {1}'.format(name, format_dict(node['value'], shift+4), shift * ' ')
+        return '{2}    {0}: {1}'.format(name, format_dict(node['value'],
+                                        shift + 4), shift * ' ')
     elif status == CHANGED:
         old_value = node['old_value']
-        return '{3}  - {0}: {1}\n{3}  + {0}: {2}'.format(name, format_dict(old_value, shift+4), format_dict(node['value'], shift+4), shift * ' ')
+        output = '{3}  - {0}: {1}\n{3}  + {0}: {2}'
+        return output.format(name,
+                             format_dict(old_value, shift + 4),
+                             format_dict(node['value'], shift + 4),
+                             shift * ' ')
