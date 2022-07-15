@@ -19,24 +19,22 @@ def make_diff(first, second):
             status = SAVED
         elif type(first[key]) is dict and type(second[key]) is dict:
             children = make_diff(first[key], second[key])
-            status = RECURSIVE
             result.append(
                 {
                     'name': key,
                     'children': children,
-                    'status': status
+                    'status': RECURSIVE
                 })
             continue
         else:
             value = second[key]
             old_value = first[key]
-            status = CHANGED
             result.append(
                 {
                     'name': key,
                     'value': value,
                     'old_value': old_value,
-                    'status': status
+                    'status': CHANGED
                 })
             continue
         result.append(
