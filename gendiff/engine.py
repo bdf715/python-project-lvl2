@@ -1,5 +1,5 @@
 from gendiff.parser import get_parsed
-from gendiff.formatter import formatter
+from gendiff.formatter.formatter import formatter
 from gendiff.constants import ADDED, REMOVED, SAVED, CHANGED, RECURSIVE
 
 
