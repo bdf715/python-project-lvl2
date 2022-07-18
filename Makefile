@@ -8,6 +8,8 @@ gentest1:
 	poetry run gendiff tests/fixtures/file1_nested.json tests/fixtures/file2_nested.json
 gentest2:
 	poetry run gendiff tests/fixtures/file1_nested.yaml tests/fixtures/file2_nested.yaml
+gentest3:
+	poetry run gendiff tests/fixtures/file1_nested.yaml tests/fixtures/file2_nested.yaml -f plain
 publish:
 	poetry publish --dry-run
 package-install:
