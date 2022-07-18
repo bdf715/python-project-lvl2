@@ -1,4 +1,6 @@
 from gendiff.scripts.gendiff import generate_diff
+import json
+
 
 def test_generate_diff_simple():
     first_path = 'tests/fixtures/file1_simple.yaml'
@@ -27,3 +29,11 @@ def test_generate_diff_plain():
     output_plain = open('tests/fixtures/output_plain').read().rstrip()
     assert generate_diff(first_path, second_path,
                          format_name='plain') == output_plain
+
+
+def test_generate_diff_json():
+    first_path = 'tests/fixtures/file1_nested.json'
+    second_path = 'tests/fixtures/file2_nested.json'
+    output_json = json.load(open('tests/fixtures/output_json'))
+    assert generate_diff(first_path, second_path,
+                         format_name='json') == output_json
