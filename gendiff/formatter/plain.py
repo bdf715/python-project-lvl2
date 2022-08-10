@@ -29,7 +29,7 @@ def final_format(value):
     elif isinstance(value, dict):
         return "[complex value]"
     elif type(value) is not str:
-        return "'" + str(value) + "'"
+        return str(value)
     else:
         return "'" + value + "'"
 
