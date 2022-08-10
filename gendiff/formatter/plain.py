@@ -29,7 +29,7 @@ def final_format(value):
     elif isinstance(value, dict):
         return "[complex value]"
     else:
-        return "'" + value + "'"
+        return "'" + str(value) + "'"
 
 
 def formatter_plain(node, path=''):
