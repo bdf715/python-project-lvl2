@@ -28,8 +28,10 @@ def final_format(value):
         return 'null'
     elif isinstance(value, dict):
         return "[complex value]"
-    else:
+    elif type(value) is not str:
         return "'" + str(value) + "'"
+    else:
+        return "'" + value + "'"
 
 
 def formatter_plain(node, path=''):
